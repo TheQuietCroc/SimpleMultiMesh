@@ -1,0 +1,169 @@
+[gd_scene load_steps=10 format=3 uid="uid://w0xgttvtwxk"]
+
+[ext_resource type="Texture2D" uid="uid://b13yqiy6k571s" path="res://icon.svg" id="1_g76xm"]
+[ext_resource type="Script" path="res://addons/simple_multimesh/SimpleMultiMesh2D/SimpleMultiMesh2D.gd" id="1_yeafx"]
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_dwd8m"]
+_surfaces = [{
+"2d": true,
+"aabb": AABB(-64, -64, 0, 128, 128, 0),
+"attribute_data": PackedByteArray(51, 51, 118, 63, 0, 0, 0, 0, 0, 0, 32, 61, 0, 0, 0, 0, 205, 204, 204, 58, 0, 0, 32, 61, 0, 0, 0, 0, 0, 0, 122, 63, 205, 204, 236, 60, 0, 0, 128, 63, 51, 51, 119, 63, 0, 0, 128, 63, 205, 204, 127, 63, 0, 0, 118, 63, 0, 0, 128, 63, 154, 153, 185, 60),
+"format": 34393296913,
+"index_count": 18,
+"index_data": PackedByteArray(0, 0, 7, 0, 6, 0, 6, 0, 5, 0, 4, 0, 4, 0, 3, 0, 2, 0, 2, 0, 1, 0, 0, 0, 0, 0, 6, 0, 4, 0, 4, 0, 2, 0, 0, 0),
+"primitive": 3,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 8,
+"vertex_data": PackedByteArray(102, 102, 108, 66, 0, 0, 128, 194, 0, 0, 108, 194, 0, 0, 128, 194, 51, 51, 127, 194, 0, 0, 108, 194, 0, 0, 128, 194, 0, 0, 116, 66, 51, 51, 113, 194, 0, 0, 128, 66, 102, 102, 110, 66, 0, 0, 128, 66, 154, 153, 127, 66, 0, 0, 108, 66, 0, 0, 128, 66, 102, 102, 116, 194)
+}]
+
+[sub_resource type="MultiMesh" id="MultiMesh_xu7pt"]
+mesh = SubResource("ArrayMesh_dwd8m")
+
+[sub_resource type="MultiMesh" id="MultiMesh_mtk0d"]
+mesh = SubResource("ArrayMesh_dwd8m")
+
+[sub_resource type="MultiMesh" id="MultiMesh_sma0s"]
+mesh = SubResource("ArrayMesh_dwd8m")
+
+[sub_resource type="Animation" id="Animation_t3cvc"]
+resource_name = "new_animation"
+length = 5.0
+loop_mode = 2
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Once/Marker2D:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(256, 128), Vector2(256, 600)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Process/Marker2D:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(512, 128), Vector2(512, 600)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Physics/Marker2D:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(855, 128), Vector2(855, 600)]
+}
+
+[sub_resource type="Animation" id="Animation_3lenk"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Once/Marker2D:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(129, 115)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Process/Marker2D:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(448, 109)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Physics/Marker2D:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(855, 107)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_r41y8"]
+_data = {
+"RESET": SubResource("Animation_3lenk"),
+"new_animation": SubResource("Animation_t3cvc")
+}
+
+[node name="Test Scene" type="Node2D"]
+
+[node name="Once" type="MultiMeshInstance2D" parent="."]
+multimesh = SubResource("MultiMesh_xu7pt")
+texture = ExtResource("1_g76xm")
+script = ExtResource("1_yeafx")
+groupName = &"once"
+
+[node name="Marker2D" type="Marker2D" parent="Once" groups=["once"]]
+position = Vector2(129, 115)
+
+[node name="Label" type="Label" parent="Once/Marker2D"]
+offset_top = 64.0
+offset_right = 40.0
+offset_bottom = 87.0
+text = "once"
+
+[node name="Process" type="MultiMeshInstance2D" parent="."]
+multimesh = SubResource("MultiMesh_mtk0d")
+texture = ExtResource("1_g76xm")
+script = ExtResource("1_yeafx")
+groupName = &"process"
+updateMode = 1
+
+[node name="Marker2D" type="Marker2D" parent="Process" groups=["process"]]
+position = Vector2(448, 109)
+
+[node name="Label" type="Label" parent="Process/Marker2D"]
+offset_top = 64.0
+offset_right = 60.0
+offset_bottom = 87.0
+text = "process"
+
+[node name="Physics" type="MultiMeshInstance2D" parent="."]
+multimesh = SubResource("MultiMesh_sma0s")
+texture = ExtResource("1_g76xm")
+script = ExtResource("1_yeafx")
+groupName = &"physics"
+updateMode = 2
+
+[node name="Marker2D" type="Marker2D" parent="Physics" groups=["physics"]]
+position = Vector2(855, 107)
+gizmo_extents = 1536.0
+
+[node name="Label" type="Label" parent="Physics/Marker2D"]
+offset_top = 64.0
+offset_right = 57.0
+offset_bottom = 87.0
+text = "physics"
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_r41y8")
+}
+autoplay = "new_animation"

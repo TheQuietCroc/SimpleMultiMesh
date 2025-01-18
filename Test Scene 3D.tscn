@@ -1,0 +1,172 @@
+[gd_scene load_steps=15 format=3 uid="uid://da0tert30hl8f"]
+
+[ext_resource type="Script" path="res://addons/simple_multimesh/SimpleMultiMesh3D/SimpleMultiMesh3D.gd" id="1_txgws"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_5cl2u"]
+sky_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
+ground_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
+
+[sub_resource type="Sky" id="Sky_pveup"]
+sky_material = SubResource("ProceduralSkyMaterial_5cl2u")
+
+[sub_resource type="Environment" id="Environment_81twg"]
+background_mode = 2
+sky = SubResource("Sky_pveup")
+tonemap_mode = 2
+glow_enabled = true
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_8jikj"]
+albedo_color = Color(1, 0, 1, 1)
+
+[sub_resource type="SphereMesh" id="SphereMesh_2ymum"]
+
+[sub_resource type="MultiMesh" id="MultiMesh_n2bob"]
+transform_format = 1
+mesh = SubResource("SphereMesh_2ymum")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_0ynt4"]
+albedo_color = Color(0, 1, 1, 1)
+
+[sub_resource type="MultiMesh" id="MultiMesh_dp0j6"]
+transform_format = 1
+mesh = SubResource("SphereMesh_2ymum")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_dctvk"]
+albedo_color = Color(1, 1, 0, 1)
+
+[sub_resource type="MultiMesh" id="MultiMesh_mj2a1"]
+transform_format = 1
+mesh = SubResource("SphereMesh_2ymum")
+
+[sub_resource type="Animation" id="Animation_ejes3"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Once/Marker3D:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0, -1.016, -2.24)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Process/Marker3D:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0, 0.074, -2.24)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Physics/Marker3D:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0, 1.134, -2.24)]
+}
+
+[sub_resource type="Animation" id="Animation_cv51r"]
+resource_name = "new_animation"
+length = 7.5
+loop_mode = 2
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Once/Marker3D:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 2.5, 7.5),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector3(0, -1.016, -2.24), Vector3(-5, -1.016, -2.24), Vector3(5, -1.016, -2.24)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Process/Marker3D:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 2.5, 7.5),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector3(0, 0.074, -2.24), Vector3(-5, 0.074, -2.24), Vector3(5, 0.074, -2.24)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Physics/Marker3D:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 2.5, 7.5),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector3(0, 1.134, -2.24), Vector3(-5, 1.134, -2.24), Vector3(5, 1.134, -2.24)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_v0jjp"]
+_data = {
+"RESET": SubResource("Animation_ejes3"),
+"new_animation": SubResource("Animation_cv51r")
+}
+
+[node name="Test Scene" type="Node3D"]
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(-0.866025, -0.433013, 0.25, 0, 0.5, 0.866025, -0.5, 0.75, -0.433013, 0, 0, 0)
+shadow_enabled = true
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_81twg")
+
+[node name="Once" type="MultiMeshInstance3D" parent="."]
+material_override = SubResource("StandardMaterial3D_8jikj")
+multimesh = SubResource("MultiMesh_n2bob")
+script = ExtResource("1_txgws")
+group_name = &"once"
+
+[node name="Marker3D" type="Marker3D" parent="Once" groups=["once"]]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, -1.016, -2.24)
+
+[node name="Process" type="MultiMeshInstance3D" parent="."]
+material_override = SubResource("StandardMaterial3D_0ynt4")
+multimesh = SubResource("MultiMesh_dp0j6")
+script = ExtResource("1_txgws")
+group_name = &"process"
+update_mode = 1
+
+[node name="Marker3D" type="Marker3D" parent="Process" groups=["process"]]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0.074, -2.24)
+
+[node name="Physics" type="MultiMeshInstance3D" parent="."]
+material_override = SubResource("StandardMaterial3D_dctvk")
+multimesh = SubResource("MultiMesh_mj2a1")
+script = ExtResource("1_txgws")
+group_name = &"physics"
+update_mode = 2
+
+[node name="Marker3D" type="Marker3D" parent="Physics" groups=["physics"]]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 1.134, -2.24)
+
+[node name="Camera3D" type="Camera3D" parent="."]
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_v0jjp")
+}
+autoplay = "new_animation"
