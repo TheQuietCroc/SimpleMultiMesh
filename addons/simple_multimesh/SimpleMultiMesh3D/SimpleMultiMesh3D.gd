@@ -32,8 +32,13 @@ func render_meshes():
 	var _group_nodes = group_nodes
 	
 	multimesh.instance_count = maxi(_group_nodes.size(), multimesh.instance_count)
-	multimesh.visible_instance_count = _group_nodes.size()
 	
-	for i in multimesh.visible_instance_count:
+	var _valid_indices = 0
+	
+	for i in _group_nodes.size():
 		if (is_instance_valid(_group_nodes[i]) and not _group_nodes[i].is_queued_for_deletion()):
-			multimesh.set_instance_transform(i, _group_nodes[i].global_transform)
+			multimesh.set_instance_transform(_valid_indices, _group_nodes[i].global_transform)
+			
+			_valid_indices += 1
+		
+	multimesh.visible_instance_count = _valid_indices

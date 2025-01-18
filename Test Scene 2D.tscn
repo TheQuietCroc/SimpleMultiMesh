@@ -26,6 +26,45 @@ mesh = SubResource("ArrayMesh_dwd8m")
 [sub_resource type="MultiMesh" id="MultiMesh_sma0s"]
 mesh = SubResource("ArrayMesh_dwd8m")
 
+[sub_resource type="Animation" id="Animation_3lenk"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Once/Marker2D:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(129, 115)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Process/Marker2D:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(448, 109)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Physics/Marker2D:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(855, 107)]
+}
+
 [sub_resource type="Animation" id="Animation_t3cvc"]
 resource_name = "new_animation"
 length = 5.0
@@ -67,45 +106,6 @@ tracks/2/keys = {
 "values": [Vector2(855, 128), Vector2(855, 600)]
 }
 
-[sub_resource type="Animation" id="Animation_3lenk"]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Once/Marker2D:position")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector2(129, 115)]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("Process/Marker2D:position")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector2(448, 109)]
-}
-tracks/2/type = "value"
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/path = NodePath("Physics/Marker2D:position")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector2(855, 107)]
-}
-
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_r41y8"]
 _data = {
 "RESET": SubResource("Animation_3lenk"),
@@ -118,7 +118,7 @@ _data = {
 multimesh = SubResource("MultiMesh_xu7pt")
 texture = ExtResource("1_g76xm")
 script = ExtResource("1_yeafx")
-groupName = &"once"
+group_name = &"once"
 
 [node name="Marker2D" type="Marker2D" parent="Once" groups=["once"]]
 position = Vector2(129, 115)
@@ -133,8 +133,8 @@ text = "once"
 multimesh = SubResource("MultiMesh_mtk0d")
 texture = ExtResource("1_g76xm")
 script = ExtResource("1_yeafx")
-groupName = &"process"
-updateMode = 1
+group_name = &"process"
+update_mode = 1
 
 [node name="Marker2D" type="Marker2D" parent="Process" groups=["process"]]
 position = Vector2(448, 109)
@@ -149,8 +149,8 @@ text = "process"
 multimesh = SubResource("MultiMesh_sma0s")
 texture = ExtResource("1_g76xm")
 script = ExtResource("1_yeafx")
-groupName = &"physics"
-updateMode = 2
+group_name = &"physics"
+update_mode = 2
 
 [node name="Marker2D" type="Marker2D" parent="Physics" groups=["physics"]]
 position = Vector2(855, 107)
